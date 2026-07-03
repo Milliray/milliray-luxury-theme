@@ -1,0 +1,21 @@
+<!-- Footer section -->
+<section class="site-footer-inner wrapper">
+  <div class="footer-columns">
+    <div class="col">
+      <h4>{{ section.settings.title }}</h4>
+      <p>{{ section.settings.text }}</p>
+    </div>
+  </div>
+  <div class="copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
+</section>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "About" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Milliray — crafted luxury." }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}

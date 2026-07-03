@@ -1,0 +1,32 @@
+<!-- Product template section -->
+<section class="product-template wrapper">
+  {% if product %}
+    <div class="product-single">
+      <div class="media">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | img_url: '1024x1024' }}" alt="{{ product.title }}">
+        {% endif %}
+      </div>
+      <div class="details">
+        <h1>{{ product.title }}</h1>
+        <div class="price">{{ product.price | money }}</div>
+        <div class="description">{{ product.description }}</div>
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button class="btn" type="submit">Add to cart</button>
+        </form>
+      </div>
+    </div>
+  {% else %}
+    <p>Product not found.</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Product template",
+  "settings": [],
+  "blocks": [],
+  "presets": [{ "name": "Product" }]
+}
+{% endschema %}

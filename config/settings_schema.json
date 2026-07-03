@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_primary", "label": "Primary color", "default": "#0a0a0a" },
+      { "type": "color", "id": "color_accent", "label": "Accent color", "default": "#c9a77b" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "font_picker", "id": "font_heading", "label": "Heading font" },
+      { "type": "font_picker", "id": "font_body", "label": "Body font" }
+    ]
+  }
+]

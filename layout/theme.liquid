@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page_title }} - {{ shop.name }}</title>
+    {{ content_for_header }}
+    <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
+  </head>
+  <body class="theme-root">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="brand" href="/">{{ shop.name }}</a>
+      </div>
+    </header>
+
+    <main role="main"> 
+      {{ content_for_layout }}
+    </main>
+
+    <footer class="site-footer">
+      {% section 'footer' %}
+    </footer>
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    {{ content_for_footer }}
+  </body>
+</html>
