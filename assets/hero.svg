@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="700" viewBox="0 0 1600 700" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hero placeholder">
+  <rect width="1600" height="700" fill="#f8f6f4"/>
+  <g opacity="0.06">
+    <rect x="60" y="60" width="1480" height="580" rx="16" fill="#000"/>
+  </g>
+  <g transform="translate(120,80)" fill="#0b0b0b" font-family="Playfair Display, serif">
+    <text x="0" y="80" font-size="58">Milliray Luxury</text>
+    <text x="0" y="120" font-size="22" fill="#707070">Elevate your style</text>
+  </g>
+</svg>

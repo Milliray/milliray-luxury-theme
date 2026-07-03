@@ -1,16 +1,21 @@
-<!-- Hero section: large photography-forward banner -->
-<section class="hero" data-section-id="hero">
-  <div class="hero-inner wrapper">
+<!-- Hero section with optional image and fallback to bundled hero.svg -->
+<section class="hero wrapper" style="background:transparent;">
+  <div class="hero-inner" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
     {% if section.settings.image != blank %}
       <div class="hero-media">
-        <img src="{{ section.settings.image | img_url: '2048x2048' }}" alt="{{ section.settings.heading }}">
+        <img src="{{ section.settings.image | img_url: '2048x2048' }}" alt="{{ section.settings.heading }}" style="max-width:100%;border-radius:8px;">
+      </div>
+    {% else %}
+      <div class="hero-media">
+        <img src="{{ 'hero.svg' | asset_url }}" alt="{{ section.settings.heading }}" style="max-width:100%;border-radius:8px;">
       </div>
     {% endif %}
-    <div class="hero-content">
+
+    <div class="hero-content" style="margin-top:18px; text-align:center;">
       <h1>{{ section.settings.heading }}</h1>
       <p>{{ section.settings.subheading }}</p>
       {% if section.settings.button_text != blank and section.settings.button_link != blank %}
-        <a class="btn" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+        <p><a class="btn" href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a></p>
       {% endif %}
     </div>
   </div>
@@ -18,7 +23,7 @@
 
 {% schema %}
 {
-  "name": "Hero",
+  "name": "Hero (large)",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Background image" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Milliray Luxury" },
@@ -26,7 +31,6 @@
     { "type": "text", "id": "button_text", "label": "Button text" },
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],
-  "blocks": [],
-  "presets": [{ "name": "Hero" }]
+  "presets": [{ "name": "Hero (large)" }]
 }
 {% endschema %}

@@ -1,0 +1,10 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant Price,Image Src
+male-luxe-coat,Heritage Coat,"A refined wool coat with tailored lines.",Milliray,Outerwear,"male,coat,luxury",TRUE,Title,Default,299.00,https://source.unsplash.com/1600x1600/?mens-coat
+male-silk-shirt,Silk Dress Shirt,"Lightweight silk shirt for premium comfort.",Milliray,Shirt,"male,shirt,luxury",TRUE,Title,Default,119.00,https://source.unsplash.com/1600x1600/?mens-shirt
+male-leather-shoe,Signature Leather Shoe,"Handcrafted leather shoe with refined finish.",Milliray,Shoes,"male,shoes,luxury",TRUE,Title,Default,249.00,https://source.unsplash.com/1600x1600/?mens-shoes
+female-tailored-coat,The Tailored Coat,"Structured coat in luxury wool.",Milliray,Outerwear,"female,coat,luxury",TRUE,Title,Default,319.00,https://source.unsplash.com/1600x1600/?womens-coat
+female-satin-dress,Satin Evening Dress,"Elegant satin evening dress.",Milliray,Dress,"female,dress,luxury",TRUE,Title,Default,199.00,https://source.unsplash.com/1600x1600/?womens-dress
+female-suede-heel,Suede Heels,"Comfortable suede heels crafted for evening wear.",Milliray,Shoes,"female,shoes,luxury",TRUE,Title,Default,189.00,https://source.unsplash.com/1600x1600/?womens-shoes
+accessories-leather-belt,Signature Belt,"Full-grain leather belt with brass buckle.",Milliray,Accessories,"accessories,belt,luxury",TRUE,Title,Default,79.00,https://source.unsplash.com/1600x1600/?leather-belt
+accessories-silk-scarf,Silk Scarf,"Hand-printed silk scarf with subtle pattern.",Milliray,Accessories,"accessories,scarf,luxury",TRUE,Title,Default,59.00,https://source.unsplash.com/1600x1600/?silk-scarf
+accessories-gold-bracelet,Gold Bracelet,"Minimalist gold-plated bracelet.",Milliray,Accessories,"accessories,bracelet,luxury",TRUE,Title,Default,129.00,https://source.unsplash.com/1600x1600/?gold-bracelet
