@@ -1,34 +1,43 @@
-<!-- Header section with primary navigation (uses uploaded logo if present, falls back to bundled logo.svg) -->
+<!-- Header section with Main menu (editable) and cart-drawer include -->
 <header class="site-header" role="banner">
   <div class="header-inner wrapper">
     <div class="brand-wrap">
       {% if section.settings.logo != blank %}
         <a class="brand" href="/">
-          <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }} logo" style="height:42px; object-fit:contain">
+          <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }} logo" style="height:46px; object-fit:contain">
         </a>
       {% else %}
         <a class="brand" href="/">
-          <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }} logo" style="height:42px; display:block">
+          <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }} logo" style="height:46px; display:block">
         </a>
       {% endif %}
     </div>
 
     <nav class="main-nav" role="navigation" aria-label="Main menu">
-      <!-- Static primary navigation: Male, Female, Accessories -->
-      <ul class="menu">
-        <li class="menu-item"><a href="/collections/male">Male</a></li>
-        <li class="menu-item"><a href="/collections/female">Female</a></li>
-        <li class="menu-item"><a href="/collections/accessories">Accessories</a></li>
-      </ul>
+      {% if linklists.main-menu.links.size > 0 %}
+        <ul class="menu">
+          {% for link in linklists.main-menu.links %}
+            <li class="menu-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <ul class="menu">
+          <li class="menu-item"><a href="/collections/male">Male</a></li>
+          <li class="menu-item"><a href="/collections/female">Female</a></li>
+          <li class="menu-item"><a href="/collections/accessories">Accessories</a></li>
+        </ul>
+      {% endif %}
     </nav>
 
     <div class="header-actions">
       <a class="search-link" href="/search">Search</a>
-      <a class="cart-link" href="/cart">Cart</a>
+      <a class="cart-link open-cart" href="/cart">Cart</a>
     </div>
 
     <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
   </div>
+  {% comment %} Render cart drawer snippet so JS can find it on page load {% endcomment %}
+  {% render 'cart-drawer' %}
 </header>
 
 {% schema %}

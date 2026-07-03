@@ -1,9 +1,19 @@
 <article class="product-card">
   <a href="{{ product.url }}">
     {% if product.featured_image %}
-      <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}">
+      <img src="{{ product.featured_image | img_url: '1440x1440' }}" alt="{{ product.title }}">
+    {% else %}
+      <img src="{{ 'product-placeholder.svg' | asset_url }}" alt="{{ product.title }}">
     {% endif %}
     <h3>{{ product.title }}</h3>
+    <div class="meta">{{ product.vendor }}</div>
     <div class="price">{{ product.price | money }}</div>
   </a>
+  <div class="card-actions">
+    <button class="btn-quick" data-quick-view data-product-url="{{ product.url }}">Quick view</button>
+    <form method="post" action="/cart/add">
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button class="btn">Add to cart</button>
+    </form>
+  </div>
 </article>

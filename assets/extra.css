@@ -1,13 +1,4 @@
-/* Additional polish for Milliray theme - small tweaks */
+/* Quick additions for the Fast makeover: ensure extra file is loaded by theme */
+/* This file is intentionally small — base.css contains main rules */
 
-/* Hero adjustments for image fit */
-.hero-media img{width:100%;height:auto;object-fit:cover;border-radius:12px}
-.hero-content h1{font-size:48px}
-
-/* Product card hover */
-.product-card{transition:transform .18s ease, box-shadow .18s ease}
-.product-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.08)}
-
-/* Header spacing */
-.brand img{height:42px}
-
+.quickview-modal .quickview-inner .quickview-content img{max-width:100%;height:auto}
