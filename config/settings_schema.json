@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement",
+        "label": "Announcement",
+        "default": "Welcome to Milliray"
+      }
+    ]
+  }
+]
