@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Milliray logo">
+  <title>Milliray</title>
+  <rect width="160" height="160" rx="8" fill="white"/>
+  <g transform="translate(20,18)" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 6 C28 6, 28 26, 8 26" />
+    <path d="M8 32 C28 32, 28 52, 8 52" />
+    <path d="M8 58 C28 58, 28 78, 8 78" />
+    <path d="M8 84 C28 84, 98 84, 98 84" />
+  </g>
+</svg>
