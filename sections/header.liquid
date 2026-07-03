@@ -1,31 +1,62 @@
-<!-- Header section with Main menu (editable) and cart-drawer include -->
+<!-- Header section with editable menu blocks (menu items with optional images) -->
 <header class="site-header" role="banner">
   <div class="header-inner wrapper">
     <div class="brand-wrap">
       {% if section.settings.logo != blank %}
         <a class="brand" href="/">
-          <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }} logo" style="height:46px; object-fit:contain">
+          <img src="{{ section.settings.logo | img_url: '400x' }}" alt="{{ shop.name }} logo" style="height:48px; object-fit:contain">
         </a>
       {% else %}
         <a class="brand" href="/">
-          <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }} logo" style="height:46px; display:block">
+          <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }} logo" style="height:48px; display:block">
         </a>
       {% endif %}
     </div>
 
     <nav class="main-nav" role="navigation" aria-label="Main menu">
-      {% if linklists.main-menu.links.size > 0 %}
+      {% if section.blocks.size > 0 %}
         <ul class="menu">
-          {% for link in linklists.main-menu.links %}
-            <li class="menu-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% for block in section.blocks %}
+            <li class="menu-item menu-item-block" data-block-id="{{ block.id }}">
+              {% assign link = block.settings.link %}
+              <a href="{{ link }}" class="menu-link">
+                <span class="menu-title">{{ block.settings.title }}</span>
+              </a>
+
+              {% if block.settings.image != blank %}
+                <div class="menu-mega">
+                  <a href="{{ link }}">
+                    <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.title }}" />
+                  </a>
+                </div>
+              {% endif %}
+            </li>
           {% endfor %}
         </ul>
       {% else %}
-        <ul class="menu">
-          <li class="menu-item"><a href="/collections/male">Male</a></li>
-          <li class="menu-item"><a href="/collections/female">Female</a></li>
-          <li class="menu-item"><a href="/collections/accessories">Accessories</a></li>
-        </ul>
+        {%- comment -%} Fallback to main-menu or static links {%- endcomment -%}
+        {% if linklists.main-menu.links.size > 0 %}
+          <ul class="menu">
+            {% for link in linklists.main-menu.links %}
+              <li class="menu-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <ul class="menu">
+            <li class="menu-item">
+              <a href="/collections/male">Men</a>
+              <div class="menu-mega"><a href="/collections/male"><img src="{{ 'product-placeholder.svg' | asset_url }}" alt="Men"></a></div>
+            </li>
+            <li class="menu-item">
+              <a href="/collections/female">Women</a>
+              <div class="menu-mega"><a href="/collections/female"><img src="{{ 'product-placeholder.svg' | asset_url }}" alt="Women"></a></div>
+            </li>
+            <li class="menu-item">
+              <a href="/collections/accessories">Accessories</a>
+              <div class="menu-mega"><a href="/collections/accessories"><img src="{{ 'product-placeholder.svg' | asset_url }}" alt="Accessories"></a></div>
+            </li>
+          </ul>
+        {% endif %}
       {% endif %}
     </nav>
 
@@ -36,16 +67,35 @@
 
     <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
   </div>
-  {% comment %} Render cart drawer snippet so JS can find it on page load {% endcomment %}
   {% render 'cart-drawer' %}
 </header>
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "Header (editable menu)",
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Logo" }
   ],
-  "presets": [{ "name": "Header" }]
+  "blocks": [
+    {
+      "type": "menu_item",
+      "name": "Menu item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Title" },
+        { "type": "url", "id": "link", "label": "Link", "default": "/collections/male" },
+        { "type": "image_picker", "id": "image", "label": "Menu image (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header (default)",
+      "blocks": [
+        { "type": "menu_item", "settings": { "title": "Men", "link": "/collections/male" } },
+        { "type": "menu_item", "settings": { "title": "Women", "link": "/collections/female" } },
+        { "type": "menu_item", "settings": { "title": "Accessories", "link": "/collections/accessories" } }
+      ]
+    }
+  ]
 }
 {% endschema %}
