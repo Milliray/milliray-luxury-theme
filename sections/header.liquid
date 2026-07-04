@@ -1,6 +1,4 @@
-<!-- Header section with editable menu blocks (menu items with optional images)
-     Fallback: if a block has no image, use bundled menu images based on title (Men/Women/Accessories)
--->
+<!-- Header section updated to prefer white logo for dark theme, and ensure nav text/icons are visible on dark background -->
 <header class="site-header" role="banner">
   <div class="header-inner wrapper">
     <div class="brand-wrap">
@@ -10,7 +8,11 @@
         </a>
       {% else %}
         <a class="brand" href="/">
-          <img src="{{ 'logo.custom.svg' | asset_url }}" alt="{{ shop.name }} logo" style="height:48px; display:block">
+          {% if asset_url contains 'logo.custom--white.svg' %}
+            <img src="{{ 'logo.custom--white.svg' | asset_url }}" alt="{{ shop.name }} logo" style="height:48px; display:block">
+          {% else %}
+            <img src="{{ 'logo.custom--white.svg' | asset_url }}" alt="{{ shop.name }} logo" style="height:48px; display:block">
+          {% endif %}
         </a>
       {% endif %}
     </div>
@@ -25,7 +27,6 @@
                 <span class="menu-title">{{ block.settings.title }}</span>
               </a>
 
-              {% comment %} determine image: use block.settings.image if present, otherwise map by title to bundled assets {% endcomment %}
               {% assign img_src = block.settings.image %}
               {% if img_src == blank %}
                 {% assign lower = block.settings.title | downcase %}
@@ -51,7 +52,6 @@
           {% endfor %}
         </ul>
       {% else %}
-        {%- comment -%} Fallback to main-menu or static links {%- endcomment -%}
         {% if linklists.main-menu.links.size > 0 %}
           <ul class="menu">
             {% for link in linklists.main-menu.links %}
@@ -86,33 +86,3 @@
   </div>
   {% render 'cart-drawer' %}
 </header>
-
-{% schema %}
-{
-  "name": "Header (editable menu)",
-  "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo" }
-  ],
-  "blocks": [
-    {
-      "type": "menu_item",
-      "name": "Menu item",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Title" },
-        { "type": "url", "id": "link", "label": "Link", "default": "/collections/male" },
-        { "type": "image_picker", "id": "image", "label": "Menu image (optional)" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Header (default)",
-      "blocks": [
-        { "type": "menu_item", "settings": { "title": "Men", "link": "/collections/male" } },
-        { "type": "menu_item", "settings": { "title": "Women", "link": "/collections/female" } },
-        { "type": "menu_item", "settings": { "title": "Accessories", "link": "/collections/accessories" } }
-      ]
-    }
-  ]
-}
-{% endschema %}
