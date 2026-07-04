@@ -1,4 +1,6 @@
-<!-- Header section with editable menu blocks (menu items with optional images) -->
+<!-- Header section with editable menu blocks (menu items with optional images)
+     Fallback: if a block has no image, use bundled menu images based on title (Men/Women/Accessories)
+-->
 <header class="site-header" role="banner">
   <div class="header-inner wrapper">
     <div class="brand-wrap">
@@ -18,18 +20,33 @@
         <ul class="menu">
           {% for block in section.blocks %}
             <li class="menu-item menu-item-block" data-block-id="{{ block.id }}">
-              {% assign link = block.settings.link %}
+              {% assign link = block.settings.link | default: '/' %}
               <a href="{{ link }}" class="menu-link">
                 <span class="menu-title">{{ block.settings.title }}</span>
               </a>
 
-              {% if block.settings.image != blank %}
-                <div class="menu-mega">
-                  <a href="{{ link }}">
-                    <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.title }}" />
-                  </a>
-                </div>
+              {% comment %} determine image: use block.settings.image if present, otherwise map by title to bundled assets {% endcomment %}
+              {% assign img_src = block.settings.image %}
+              {% if img_src == blank %}
+                {% assign lower = block.settings.title | downcase %}
+                {% if lower contains 'men' %}
+                  {% assign img_src = 'menu-men.svg' | asset_url %}
+                {% elsif lower contains 'woman' or lower contains 'women' %}
+                  {% assign img_src = 'menu-women.svg' | asset_url %}
+                {% elsif lower contains 'access' or lower contains 'accessories' %}
+                  {% assign img_src = 'menu-accessories.svg' | asset_url %}
+                {% else %}
+                  {% assign img_src = 'product-placeholder.svg' | asset_url %}
+                {% endif %}
+              {% else %}
+                {% assign img_src = block.settings.image | img_url: '800x' %}
               {% endif %}
+
+              <div class="menu-mega">
+                <a href="{{ link }}">
+                  <img src="{{ img_src }}" alt="{{ block.settings.title }}" />
+                </a>
+              </div>
             </li>
           {% endfor %}
         </ul>
@@ -45,15 +62,15 @@
           <ul class="menu">
             <li class="menu-item">
               <a href="/collections/male">Men</a>
-              <div class="menu-mega"><a href="/collections/male"><img src="{{ 'product-placeholder.svg' | asset_url }}" alt="Men"></a></div>
+              <div class="menu-mega"><a href="/collections/male"><img src="{{ 'menu-men.svg' | asset_url }}" alt="Men"></a></div>
             </li>
             <li class="menu-item">
               <a href="/collections/female">Women</a>
-              <div class="menu-mega"><a href="/collections/female"><img src="{{ 'product-placeholder.svg' | asset_url }}" alt="Women"></a></div>
+              <div class="menu-mega"><a href="/collections/female"><img src="{{ 'menu-women.svg' | asset_url }}" alt="Women"></a></div>
             </li>
             <li class="menu-item">
               <a href="/collections/accessories">Accessories</a>
-              <div class="menu-mega"><a href="/collections/accessories"><img src="{{ 'product-placeholder.svg' | asset_url }}" alt="Accessories"></a></div>
+              <div class="menu-mega"><a href="/collections/accessories"><img src="{{ 'menu-accessories.svg' | asset_url }}" alt="Accessories"></a></div>
             </li>
           </ul>
         {% endif %}
